@@ -124,6 +124,9 @@ db.once('open',function(callback){
 });
 app.use(express.static('./'));
 
+app.get('/', function (req, res) {
+  res.sendFile('./index.html', {root: './'});
+});
 
 // Send all records when there's a GET request to `localhost:3000/test`
 app.get('/BANCA', function (req, res) {
