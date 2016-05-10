@@ -44,7 +44,7 @@ db.once('open',function(callback){
 			}
 		
 			var jsonArrayValor = JSON.parse(JSON.stringify(jsonString));
-		
+			//si count === 0
 			var aDocs = jsonArrayValor;
 			for (var n = 0; n < aDocs.length; n++){
 				var docToAdd = new Document(aDocs[n]);
@@ -52,6 +52,8 @@ db.once('open',function(callback){
 					if (error) return console.error(error)
 				});
 			}
+			//else
+			//añado el último elemento docToAdd = new Document(aDocs[aDocs.length-1])
 		}
 	});
 });
