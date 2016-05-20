@@ -42,16 +42,53 @@ db.once('open',function(callback){
 				jsonDato.volumen = parseFloat(parseo[i][5]);
 				jsonString.push(jsonDato);
 			}
+
 		
 			var jsonArrayValor = JSON.parse(JSON.stringify(jsonString));
 			//si count === 0
 			var aDocs = jsonArrayValor;
-			for (var n = 0; n < aDocs.length; n++){
+			Document.count({ },function(error,count){
+
+			if (count === 0){
+				for (var n = 0; n < aDocs.length; n++){
 				var docToAdd = new Document(aDocs[n]);
 				docToAdd.save(function(error,docToAdd){
 					if (error) return console.error(error)
 				});
 			}
+			}
+			else{
+
+				//var docToAdd = new Document(aDocs[aDocs.length-1]);
+				var docToAdd = new Document(aDocs[n=0]);
+				docToAdd.save(function(error,docToAdd)
+				{
+					//if (error) return console.error(error)
+				});
+			
+			}
+
+			});
+
+			/*	if (count = 0){
+				for (var n = 0; n < aDocs.length; n++){
+				var docToAdd = new Document(aDocs[n]);
+				docToAdd.save(function(error,docToAdd){
+					if (error) return console.error(error)
+				});
+			}
+			}
+			else{
+				for (var n = 1; n < aDocs.length-1; n++){
+				var docToAdd = new Document(aDocs[n-1]);
+				docToAdd.save(function(error,docToAdd)
+				{
+					//if (error) return console.error(error)
+				});
+			}
+			}
+			*/
+			
 			//else
 			//añado el último elemento docToAdd = new Document(aDocs[aDocs.length-1])
 		}
@@ -71,5 +108,5 @@ app.get('/BANCA', function (req, res) {
 	});
 });
 
-app.listen(7070);
-console.log("Servidor conectado puerto 7070");
+app.listen(8080);
+console.log("Servidor conectado puerto 8080");
